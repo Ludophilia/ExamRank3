@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 18:01:43 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/05 18:05:14 by jgermany         ###   ########.fr       */
+/*   Created: 2024/01/05 18:00:47 by jgermany          #+#    #+#             */
+/*   Updated: 2024/01/05 18:05:09 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
-#include <stdlib.h>
-#include <unistd.h>
-
-#ifndef BUFFER_SIZE
-	#define BUFFER_SIZE 10
-#endif
+int	main(void)
+{
+	printf("It works\n");
+}

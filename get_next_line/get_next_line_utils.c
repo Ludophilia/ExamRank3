@@ -1,20 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 18:01:43 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/05 18:05:14 by jgermany         ###   ########.fr       */
+/*   Created: 2024/01/05 17:53:51 by jgermany          #+#    #+#             */
+/*   Updated: 2024/01/05 18:05:16 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <stdlib.h>
-#include <unistd.h>
-
-#ifndef BUFFER_SIZE
-	#define BUFFER_SIZE 10
-#endif
+#include "get_next_line.h"

@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:53:51 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/05 19:13:57 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:34:41 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,20 @@ char	*my_strjoin(char *str1, char *str2)
 	return (join_str);
 }
 
-// 
-
-// "ABCD" (start_max = 3, ) 
-// - start > (my_strlen(str) - 1)
-// - len 
-
 char	*my_substr(char *str, int start, int len)
 {
-	if (str == NULL || start > (my_strlen(str) - 1) || )
+	char	*sub_str;
+	int		i;
+
+	if (str == NULL || start < 0 || len < 1 || start > (my_strlen(str) - 1)
+		|| len > (my_strlen(str) - start))
+		return (NULL);
+	sub_str = malloc((len + 1) * sizeof(char));
+	if (sub_str == NULL)
+		return (NULL);
+	sub_str[len] = 0;
+	i = -1;
+	while (++i < len)
+		sub_str[i] = str[start + i];
+	return (sub_str);
 }
-
-
-// Utility functions
-// - [ ] my_substr

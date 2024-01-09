@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:53:51 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/08 16:34:41 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:16:10 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ char	*my_strdup(char *str)
 	dup_str = malloc((og_len + 1) * sizeof(char));
 	if (dup_str == NULL)
 		return (NULL);
-	dup_str[og_len] = 0;
+	i = -1;
+	while (++i < og_len + 1)
+		dup_str[i] = 0;
 	i = -1;
 	while (str[++i])
 		dup_str[i] = str[i];
@@ -69,7 +71,9 @@ char	*my_strjoin(char *str1, char *str2)
 	join_str = malloc((lens[0] + lens[1] + 1) * sizeof(char));
 	if (join_str == NULL)
 		return (NULL);
-	join_str[lens[0] + lens[1]] = 0;
+	ij[0] = -1;
+	while (++ij[0] < lens[0] + lens[1] + 1)
+		join_str[ij[0]] = 0;
 	*(long *)ij = 0;
 	while (str1[ij[1]])
 		join_str[ij[0]++] = str1[ij[1]++];
@@ -90,7 +94,9 @@ char	*my_substr(char *str, int start, int len)
 	sub_str = malloc((len + 1) * sizeof(char));
 	if (sub_str == NULL)
 		return (NULL);
-	sub_str[len] = 0;
+	i = -1;
+	while (++i < len + 1)
+		sub_str[i] = 0;
 	i = -1;
 	while (++i < len)
 		sub_str[i] = str[start + i];

@@ -3,7 +3,7 @@
 NAME="get_next_line"
 
 CC="cc"
-CFLAGS="-Wall -Wextra -Werror"
+CFLAGS="-Wall -Wextra -Werror -g3" #-DBUFFER_SIZE=100"
 
 SRCS="get_next_line.c"
 SRCS+=" get_next_line_utils.c"

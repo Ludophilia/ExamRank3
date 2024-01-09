@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:01:43 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:51 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:21:15 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 #ifndef BUFFER_SIZE
-	# define BUFFER_SIZE 10
+	# define BUFFER_SIZE 20000
 #endif
 
 #define FL_3LINES "threelines"

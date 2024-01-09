@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:01:43 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/09 13:21:15 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:31:00 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,8 @@
 #include <unistd.h>
 
 #ifndef BUFFER_SIZE
-	# define BUFFER_SIZE 20000
+	# define BUFFER_SIZE 20
 #endif
-
-#define FL_3LINES "threelines"
-#define FL_EMPTY "empty"
-#define FL_RANDOM "/dev/random"
-#define FL_GROUPS "/etc/group"
-#define FL_BUILD_SH "build.sh"
-#define FL_GNL_C "get_next_line.c"
 
 int		my_strlen(char *str);
 int		my_strchr(int c, char *str);

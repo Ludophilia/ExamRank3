@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:52:44 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/09 13:26:37 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:27:41 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*extract_line(char **stash)
 	int		nl_pos;
 	char	*old_stash;
 
-	if (stash == NULL || *stash == NULL)
+	if (stash == NULL)
 		return (NULL);
 	line = NULL;
 	nl_pos = my_strchr('\n', *stash);
@@ -80,8 +80,11 @@ char	*extract_line(char **stash)
 		*stash = my_substr(*stash, nl_pos + 1, my_strlen(*stash) - nl_pos - 1);
 		if (line == NULL)
 		{
-			free(old_stash);
-			*stash = NULL;
+			if (*stash)
+			{
+				free(*stash);
+				*stash = NULL;
+			}
 			return (NULL);
 		}
 		free(old_stash);
@@ -100,7 +103,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			bytesread;
 
-	if (fd == -1 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	bytesread = update_stash(fd, &stash);

@@ -4,6 +4,7 @@ NAME="printf"
 
 CC="cc"
 CFLAGS="-Wall -Wextra -Werror"
+CFLAGS=""
 
 SRCS="main.c"
 SRCS+=" printf.c"

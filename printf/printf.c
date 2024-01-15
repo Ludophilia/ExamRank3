@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:28 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/10 16:52:02 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:38:52 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	my_putstr(const char *str, int *count)
 
 int	my_putnbr(t_nbr *nbr, char *base, int *count)
 {
-	int	radix;
+	uint32_t	radix;
 
 	if (nbr == NULL || base == NULL || count == NULL)
 		return (-1);

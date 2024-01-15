@@ -6,7 +6,7 @@
 /*   By: jgermany <nyaritakunai@outlook.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:52:44 by jgermany          #+#    #+#             */
-/*   Updated: 2024/01/09 17:27:41 by jgermany         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:51:42 by jgermany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	update_stash(int fd, char **stash)
 	int		bytesread;
 	int		i;
 
-	if (stash == NULL)
+	if (fd < 0 || stash == NULL)
 		return (-1);
 	i = -1;
 	while (++i < BUFFER_SIZE + 1)
@@ -115,7 +115,7 @@ char	*get_next_line(int fd)
 		if (bytesread == -1)
 			return (NULL);	
 	}
-	if (my_strchr('\n', stash) != -1 || bytesread == 0)
+	if (bytesread == 0 || my_strchr('\n', stash) != -1)
 		line = extract_line(&stash);
 	return (line);
 }

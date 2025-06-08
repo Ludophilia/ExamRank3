@@ -1,4 +1,3 @@
 #! /bin/bash
 
-# cc -Wall -Wextra -Werror -I. -o printf ft_printf.c
-cc -I. -o printf ft_printf.c
+cc -Wall -Wextra -Werror -o ft_printf ft_printf.c

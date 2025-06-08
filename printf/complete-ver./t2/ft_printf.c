@@ -5,49 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 16:29:04 by jegerman          #+#    #+#             */
-/*   Updated: 2025/06/03 19:12:19 by jegerman         ###   ########.fr       */
+/*   Created: 2025/06/07 18:51:30 by jegerman          #+#    #+#             */
+/*   Updated: 2025/06/08 15:07:35 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
-int	ft_strlen(char *s)
+#include <stdarg.h>
+#include <unistd.h>
+
+#define B10 "0123456789"
+#define B16L "0123456789abcdef"
+
+#include <stdio.h>
+
+typedef struct s_nbr
 {
-	int	len;
-
-	len = 0;
-	while (s[len])
-		++len;
-	return (len);
-}
+	int				sign;
+	unsigned long	nbr;
+}	t_nbr;
 
 void	ft_putchar_cc(char c, int *count)
 {
 	write(1, &c, 1);
-	(*count)++;
+	*count += 1;
 }
 
-void	ft_putstr_cc(char *str, int *count)
+int		ft_strlen(char *str)
 {
-	int	len;
+	int len;
 
-	if (str == NULL)
-	{
-		write(1, "(null)", 6);
-		*count += 6;
-	}
-	else
-	{
-		len = ft_strlen(str);
-		write(1, str, len);
-		*count += len;
-	}
+	len = 0;
+	while (str[len])
+		++len;
+	return (len);
+}
+
+void	ft_pustr_cc(char *str, int *count)
+{
+	int	str_len;
+
+	if (str == NULL) // err - forgot to manage that case
+		str = "(null)";
+	str_len = ft_strlen(str);
+	write(1, str, str_len);
+	*count += str_len;
 }
 
 void	ft_putnbr_base_cc(t_nbr *nbr, char *base, int *count)
 {
-	unsigned int	radix;
+	unsigned long	radix;
 
 	radix = ft_strlen(base);
 	if (nbr->nbr >= radix)
@@ -57,67 +65,59 @@ void	ft_putnbr_base_cc(t_nbr *nbr, char *base, int *count)
 	ft_putchar_cc(base[nbr->nbr % radix], count);
 }
 
-void	process_specifier(const char *str, int *i, int *count, va_list args)
+void	process_specifier(char *str, va_list args, int *i, int *count)
 {
-	long			s_nbr;
-	unsigned long	u_nbr;
+	long				s_nbr; // err - used int, which causes trouble for -2147483648
+	unsigned long		u_nbr;
 
 	if (*str == 's')
-		ft_putstr_cc(va_arg(args, char *), count);
+		ft_pustr_cc(va_arg(args, char *), count);
 	else if (*str == 'd')
 	{
 		s_nbr = va_arg(args, int);
-		if (s_nbr < 0)
-			ft_putnbr_base_cc(&(t_nbr){.sign = 1, .nbr = -s_nbr}, B10, count);
+		if (s_nbr >= 0)
+			ft_putnbr_base_cc(&(t_nbr){0, s_nbr}, B10, count);
 		else
-			ft_putnbr_base_cc(&(t_nbr){.sign = 0, .nbr = s_nbr}, B10, count);
+			ft_putnbr_base_cc(&(t_nbr){1, -s_nbr}, B10, count);
 	}
 	else if (*str == 'x')
 	{
-		u_nbr = va_arg(args, unsigned int);
-		ft_putnbr_base_cc(&(t_nbr){.sign = 0, .nbr = u_nbr}, B16L, count);
+		u_nbr = va_arg(args, unsigned);
+		ft_putnbr_base_cc(&(t_nbr){0, u_nbr}, B16L, count);
 	}
 	*i += 1;
 }
 
 int	ft_printf(const char *str, ...)
 {
+	int		count;
 	va_list	args;
 	int		i;
-	int		count;
-
+	
 	va_start(args, str);
-	i = 0;
 	count = 0;
+	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '%')
-			process_specifier(str + ++i, &i, &count, args);
-		else
+		if (str[i] != '%')
 			ft_putchar_cc(str[i++], &count);
+		else
+			process_specifier((char *)str + ++i, args, &i, &count);
 	}
 	va_end(args);
 	return (count);
 }
 
-#include <stdio.h>
-
 int	main(void)
 {
-	// printf("(ft_count -> %i)\n", ft_printf("1\n"));
-	// printf("(ft_count -> %i)\n", ft_printf("123\n"));
-	// printf("(ft_count -> %i)\n", ft_printf("123456\n"));
-	// printf("(ft_count -> %i)\n", ft_printf("0123456789\n"));
-	// printf("(ft_count -> %i)\n", ft_printf("ABC%d%dDEF\n", 42, 43));
-	// printf("(ft_count -> %i)\n", ft_printf("%d %d\n", 0x80000000, 2147483647));
-	// printf("(ft_count -> %i)\n", ft_printf("%x\n", 0xFFFFFFFF));
-
-	// printf("(ft_count -> %i)\n", ft_printf("ABC%s\n", (char *)0));
-	// printf("(count -> %i)\n", printf("ABC%s\n", (char *)0));
-	// ft_printf("ABC%x\n", 0x2a, );
-
-	printf("(ft_count -> %i)\n",
-		ft_printf("ABC%d%d%s%s%x%s\n", 42, 43, "oof", "waf", 0x2a, NULL));
-	printf("(count -> %i)\n",
-		printf("ABC%d%d%s%s%x%s\n", 42, 43, "oof", "waf", 0x2a, NULL));
+	// printf("ft_count -> %i\n", ft_printf("%d\n", -2147483648));
+	// printf("count -> %i\n", printf("%d\n", (int)-2147483648));
+	// printf("ft_count -> %i\n", ft_printf("%s\n", (char *)"NULL"));
+	// printf("count -> %i\n", printf("%s\n", (char *)"NULL"));
+	// printf("ft_count -> %i\n", ft_printf("%x\n", -1));
+	// printf("count -> %i\n", printf("%x\n", -1));
+	// printf("ft_count -> %i\n", ft_printf("%x\n", -1));
+	// printf("count -> %i\n", printf("%x\n", -1));
+	printf("ft_count -> %i\n", ft_printf("012|%x|%d|%s|xx ...3\n", -1, -2147483648, (char *)0));
+	printf("count -> %i\n", printf("012|%x|%d|%s|xx ...3\n", -1, (int)-2147483648, (char *)0));
 }

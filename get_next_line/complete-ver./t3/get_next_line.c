@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:10:26 by jegerman          #+#    #+#             */
-/*   Updated: 2025/06/07 18:39:10 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:32:26 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,11 @@ char	*get_next_line(int fd)
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buffer == NULL && free_stash(&stash))
 		return (NULL);
+
 	bytes = update_stash(fd, buffer, &stash);
-	while (bytes > 0 && get_nl_pos(stash) == -1) // Err, == -1
+	while (bytes > 0 && get_nl_pos(stash) == -1) // Err, forgot to compare to -1
 		bytes = update_stash(fd, buffer, &stash);
+
 	free(buffer);
 	if (bytes == -1 || stash == NULL)
 		return (NULL);

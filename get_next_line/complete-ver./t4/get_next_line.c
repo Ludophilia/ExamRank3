@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:40:57 by jegerman          #+#    #+#             */
-/*   Updated: 2025/06/08 19:48:47 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:25:08 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,10 @@ int	update_stash(int fd, char *buffer, char **stash)
 	char	*new_stash;
 
 	bytes = read(fd, buffer, BUFFER_SIZE);
+	if (bytes != -1)
+		buffer[bytes] = 0; // Not a big deal, absolutely...
 	if (bytes == 0 || (bytes == -1 && free_stash(stash)))
 		return (bytes);
-	buffer[bytes] = 0;
 	if (*stash == NULL)
 	{
 		*stash = ft_strdup(buffer);

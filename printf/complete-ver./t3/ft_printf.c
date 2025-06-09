@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 15:41:41 by jegerman          #+#    #+#             */
-/*   Updated: 2025/06/08 17:10:59 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:32:07 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#define B10 "0123456789"
+#define B16L "0123456789abcdef"
+
 typedef struct s_nbr
 {
 	int				sign;
 	unsigned long	nbr;
 }	t_nbr;
-
-#define B10 "0123456789"
-#define B16L "0123456789abcdef"
 
 int		ft_strlen(const char *str)
 {

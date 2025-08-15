@@ -6,16 +6,16 @@
 #    By: jegerman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/13 13:06:27 by jegerman          #+#    #+#              #
-#    Updated: 2025/08/13 17:53:11 by jegerman         ###   ########.fr        #
+#    Updated: 2025/08/15 17:42:08 by jegerman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := 123
+NAME := queens
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 
-SRCS := 123-swap.c
+SRCS := ten-queens.c
 
 OBJS := $(SRCS:.c=.o)
 
@@ -28,6 +28,8 @@ clean:
 	rm -rf $(OBJS)
 
 fclean: clean
+	rm -rf $(NAME)
+	rm -rf solutions
 
 re: fclean all
 

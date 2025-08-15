@@ -6,7 +6,18 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 18:07:05 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/15 18:07:05 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:42:01 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <unistd.h>
+
+int	main(int argc, char **argv)
+{
+	// 15/07 - 
+	if (++argv == NULL && --argc != 1)
+		return (1);
+	
+	return (0);
+}

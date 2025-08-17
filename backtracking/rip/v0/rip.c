@@ -6,53 +6,69 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 18:07:05 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/16 18:39:04 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/17 19:22:23 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <unistd.h>
 
-int	rip(char *str) // rpar_rc // lpar_rc // open
-{
-
-
-}
-
-// len 0 str
-// already balanced
-
-int	ft_strlen(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		++len;
-	return (len); 
-}
-
-int	check_balance(char *str, int *rp_rm, int *lp_rm)
+// bip for balance invalid parentheses
+int	bip(char *str, int *rpr, int *lpr)
 {
 	int	i;
-	int	len;
 
-	*rp_rm = 0;
-	*lp_rm = 0;
-	len = ft_strlen(str);
-	if (len == 0)
-		return (0);
-	// len 1 already balance ? 
-	//		'(' or ')'; remove one and should be done.
 	i = -1;
-	
+	if (*str == 0)
+		return (1);
+	while (str[++i])
+	{
+		if (str[i] == '(')
+			*rpr += 1;
+		if (str[i] == ')' && *rpr == 0)
+			*lpr += 1;
+		if (str[i] == ')' && *rpr > 0)
+			*rpr -= 1;
+	}
+	if (*rpr == 0 && *lpr == 0)
+		return (1);
+	return (0);
+}
+
+// rip for remove invalid parentheses
+int	rip(int i, char *str, int rpr, int lpr)
+{
+	if (str[i] == 0)
+	{
+		bip(str, &rpr, &lpr) && printf("'%s'\n", str);
+		return (0);
+	}
+	if (str[i] == '(' && rpr > 0)
+	{
+		str[i] = ' ';
+		rip(i + 1, str, rpr - 1, lpr);
+		str[i] = '(';
+	}
+	if (str[i] == ')' && lpr > 0)
+	{
+		str[i] = ' ';
+		rip(i + 1, str, rpr, lpr - 1);
+		str[i] = ')';
+	}
+	rip(i + 1, str, rpr, lpr);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
+	int	rpr;
+	int	lpr;
+	
 	if (*(++argv) == NULL && --argc != 1)
 		return (1);
-	// check what's needed to balance the parentheses
-	rip(*argv);
+	rpr = 0;
+	lpr = 0;
+	if (bip(*argv, &rpr, &lpr) && printf("'%s'\n", *argv))
+		return (0);
+	rip(0, *argv, rpr, lpr);
 	return (0);
 }

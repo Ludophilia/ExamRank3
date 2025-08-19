@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   permutations.c                                     :+:      :+:    :+:   */
+/*   combi.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 13:28:48 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/19 17:18:59 by jegerman         ###   ########.fr       */
+/*   Created: 2025/08/19 15:11:30 by jegerman          #+#    #+#             */
+/*   Updated: 2025/08/19 19:50:11 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 int	print_nbrs(int *nbrs, int size)
 {
@@ -30,42 +29,37 @@ int	print_nbrs(int *nbrs, int size)
 	return (1);
 }
 
-void	swap(int *nb1, int *nb2)
+// - Generate duplicates in the candidates set... I don't know how strict they will be...
+int	explore(int *nbrs, int at, int nsize, int *sols, int ssize, int target)
 {
-	int	tmp;
-
-	if (nb1 == nb2)
-		return ;
-	tmp = *nb1;
-	*nb1 = *nb2;
-	*nb2 = tmp;
-}
-
-int	permutate(int *nbrs, int at, int size)
-{
-	if ((at == size - 1) && print_nbrs(nbrs, size)) // ??
-		return (0);
-	for (int i = at; i < size; i++)
+	if (at == nsize)
 	{
-		swap(nbrs + at, nbrs + i);
-		permutate(nbrs, at + 1, size);
-		swap(nbrs + at, nbrs + i);
+		target == 0 && print_nbrs(sols, ssize);
+		return (0);
 	}
+	if (nbrs[at] <= target)
+	{
+		sols[ssize] = nbrs[at];
+		explore(nbrs, at + 1, nsize, sols, ssize + 1, target - nbrs[at]);
+		sols[ssize] = 0;
+	}
+	explore(nbrs, at + 1, nsize, sols, ssize, target);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	int	*nbrs;
-	int	cli_validate(int, char **);
-	int	*cli_parse(int, char **, int **);
+	int	*sols;
+	int	target;
+	int	*cli_parse(int, char **, int **, int *);
 
-	if ((++argv, --argc == 0)
-		|| cli_validate(argc, argv) == false
-		|| cli_parse(argc, argv, &nbrs) == NULL)
+	if ((++argv, --argc < 2)
+		|| cli_parse(argc, argv, &nbrs, &target) == NULL)
 		return (1);
-	argc == 1 && print_nbrs(nbrs, argc);
-	argc > 1 && permutate(nbrs, 0, argc);
-	free(nbrs);
+	if ((sols = malloc((argc - 1) * sizeof(int))) == NULL)
+		return (free(nbrs), 2);
+	explore(nbrs, 0, argc - 1, sols, 0, target);
+	free(nbrs), free(sols);
 	return (0);
 }

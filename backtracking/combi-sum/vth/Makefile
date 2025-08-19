@@ -6,16 +6,16 @@
 #    By: jegerman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/13 13:06:27 by jegerman          #+#    #+#              #
-#    Updated: 2025/08/19 18:27:19 by jegerman         ###   ########.fr        #
+#    Updated: 2025/08/19 19:38:52 by jegerman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := queens
+NAME := thomas_combi
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 
-SRCS := ten-queens.c
+SRCS := thomas_combi.c
 
 OBJS := $(SRCS:.c=.o)
 
@@ -23,13 +23,12 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
-	
+
 clean:
 	rm -rf $(OBJS)
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf solutions
 
 re: fclean all
 

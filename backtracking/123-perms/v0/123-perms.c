@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:57:04 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/13 18:00:02 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:51:20 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	print_combs(char *combs)
 	return (0);
 }
 
-int	constraint(int i, char *at, char *combs)
+int	never_used_before(int i, char *upto, char *combs)
 {
-	for (; combs != at; combs++)
-		if (*combs == i + '0')
+	while (combs != upto)
+		if (*combs++ == (i + '0'))
 			return (0);
 	return (1);
 }
@@ -53,7 +53,7 @@ int	solve(char *at, char *combs)
 {
 	for (int i = 1; i <= LIMIT; ++i)
 	{
-		if (constraint(i, at, combs) == 1) // pruning phase
+		if (never_used_before(i, at, combs) == 1) // pruning phase
 		{
 			*at = i + '0'; // choice
 			if ((at - combs) == (LIMIT - 1))

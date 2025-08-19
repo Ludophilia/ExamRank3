@@ -6,7 +6,7 @@
 #    By: jegerman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/13 13:06:27 by jegerman          #+#    #+#              #
-#    Updated: 2025/08/15 13:22:04 by jegerman         ###   ########.fr        #
+#    Updated: 2025/08/19 18:26:59 by jegerman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ SRCS := 123-perms.c
 OBJS := $(SRCS:.c=.o)
 
 all: $(NAME)
-	$(CC) $(CFLAGS) -o $< $(OBJS)
 
 $(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
 	rm -rf $(OBJS)

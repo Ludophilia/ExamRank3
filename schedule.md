@@ -1,0 +1,17 @@
+# Schedule actually
+
+## Advanced
+
+- **Filter**
+	- [x] Standard method
+	- [ ] Better method
+		- [ ] New get_next_line compact that manages buffer size?
+
+## Backtracking
+
+- New **Permutations** of "abc" with strings sorted.
+	- Old method with strs swapped and ascii sort afterwards?
+		- Please be smarter this time.
+		- Learn to use a generic #define SWAP function instead on creating
+		a new one every time.
+	- Learn the GPT version

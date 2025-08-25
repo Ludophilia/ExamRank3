@@ -1,6 +1,7 @@
 #! /bin/bash
 
 if [ -z $1 ]; then
+	printf "usage ./build.sh <buffer_size>\n" > /dev/stderr
 	exit 123
 fi
 

@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:23:10 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/25 17:23:54 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/25 17:47:36 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			lpos;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || !(line = malloc(1 * 1024 * 1024)))
+	if (fd < 0 || BUFFER_SIZE < 1 || !(line = malloc(1024 * 1024)))
 		return (NULL);
 	lpos = 0;
 	while (1)

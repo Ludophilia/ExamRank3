@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/07 13:07:45 by jegerman          #+#    #+#             */
-/*   Updated: 2025/06/07 15:18:22 by jegerman         ###   ########.fr       */
+/*   Created: 2025/08/23 16:31:50 by jegerman          #+#    #+#             */
+/*   Updated: 2025/08/25 15:32:15 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_H
 
+# define GET_NEXT_LINE_H
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <fcntl.h>
 
-#define FILE1 "get_next_line.h"
-#define FILE2 "file"
+#ifndef BUFFER_SIZE
+ # define BUFFER_SIZE 10
+#endif
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
+char	*get_next_line(int fd);
 
-	fd = open(FILE2, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	line = get_next_line(fd);
-	while (line)
-	{
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	printf("\n(DONE)\n");
-	return (0);
-}
+#endif

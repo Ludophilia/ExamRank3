@@ -33,7 +33,7 @@ The `read` syscall will read BUFFER_SIZE every time it's possible until EOF
 and won't necessary stop exactly at the newlines...
 
 HOWEVER, with the current design, there is no memory of the bytes already 
-read between each function calls. What has been read and has not been used 
+read between each function calls. **What has been read and has not been used 
 between function calls (the part after the '\n') is **lost forever**...
 
 ... unless we:

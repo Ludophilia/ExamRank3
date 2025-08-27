@@ -6,23 +6,23 @@
 #    By: jegerman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/13 13:06:27 by jegerman          #+#    #+#              #
-#    Updated: 2025/08/27 18:32:58 by jegerman         ###   ########.fr        #
+#    Updated: 2025/08/15 13:22:26 by jegerman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := abc
+NAME := 123
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 
-SRCS := abc-perms.c
+SRCS := 123-swap.c
 
 OBJS := $(SRCS:.c=.o)
 
 all: $(NAME)
+	$(CC) $(CFLAGS) -o $< $(OBJS)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
 	rm -rf $(OBJS)

@@ -1,34 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   123-perms.c                                        :+:      :+:    :+:   */
+/*   abc-perms.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:57:04 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/27 18:47:34 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/27 18:56:35 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Generate all permutations of [1, 2, 3] so you can see the “choose → recurse
- → undo” pattern in action. */
-
-// Sure, but how to do this?
-
-// Iterate on every letter until 3 or LIMIT if generalized.
-
-// Start with the first one...
-// .. check the condition (must be different from everything that goes before)
-// .. if good, go to the next one (new function instance, with different
-//    args, usually +1)
-
-// .. check the condition
-// .. .. if good, go to the next one,
-// .. .. if bad, try the number above,
-// .. .. .. if still bad... BACKTRACK (it's just the func instance
-//          returning / getting off the stack)
-
-// .. Once you've reached the end, print everything... (HOW)
 
 #include <unistd.h>
 #include <stdio.h>
@@ -37,20 +17,20 @@
 int	is_not_duplicate(int cand, char *combs, int at)
 {
 	for (int j = 0; j < at; j++)
-		if (combs[j] == (cand + '0'))
+		if (combs[j] == cand)
 			return (0);
 	return (1);
 }
 
 int	solve(int at, char *combs, int len)
 {
-	if (at == len && puts(combs))
+	if ((at == len) && puts(combs))
 		return (0);
 	for (int i = 0; i < len; i++)
 	{
-		if (is_not_duplicate(i + '0', combs, at))
+		if (is_not_duplicate(i + 'a', combs, at))
 		{
-			combs[at] = i + '0';
+			combs[at] = i + 'a';
 			solve(at + 1, combs, len);
 			combs[at] = 0;
 		}
@@ -58,6 +38,8 @@ int	solve(int at, char *combs, int len)
 	return (0);
 }
 
+/* That method suggest contiguity between the different elements. Can't
+be used therefore for swaping alphabetically a discrete set of elements */
 int	main(int argc, char **argv)
 {
 	static char	combs[256];

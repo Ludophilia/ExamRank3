@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:30 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/20 15:57:15 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:39:12 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	print_nbrs(int *nbrs, int size)
 
 int	build_subset(int from, int *nbr, int size, int *subset, int subsize)
 {
+	// You could have just stored the array in a bigger one instead of...
+	// .. printing the solution right away.
 	if (from == size && print_nbrs(subset, subsize))
 		return (0);
 	// Do not add the number

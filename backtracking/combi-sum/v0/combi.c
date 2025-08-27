@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:30 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/19 19:50:11 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:04:24 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	print_nbrs(int *nbrs, int size)
 }
 
 // - Generate duplicates in the candidates set... I don't know how strict they will be...
-int	explore(int *nbrs, int at, int nsize, int *sols, int ssize, int target)
+int	explore(int at, int *nbrs, int nsize, int *sols, int ssize, int target)
 {
 	if (at == nsize)
 	{
@@ -40,10 +40,10 @@ int	explore(int *nbrs, int at, int nsize, int *sols, int ssize, int target)
 	if (nbrs[at] <= target)
 	{
 		sols[ssize] = nbrs[at];
-		explore(nbrs, at + 1, nsize, sols, ssize + 1, target - nbrs[at]);
+		explore(at + 1, nbrs, nsize, sols, ssize + 1, target - nbrs[at]);
 		sols[ssize] = 0;
 	}
-	explore(nbrs, at + 1, nsize, sols, ssize, target);
+	explore(at + 1, nbrs, nsize, sols, ssize, target);
 	return (0);
 }
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if ((sols = malloc((argc - 1) * sizeof(int))) == NULL)
 		return (free(nbrs), 2);
-	explore(nbrs, 0, argc - 1, sols, 0, target);
+	explore(0, nbrs, argc - 1, sols, 0, target);
 	free(nbrs), free(sols);
 	return (0);
 }

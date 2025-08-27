@@ -6,7 +6,7 @@
 /*   By: jegerman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 17:55:25 by jegerman          #+#    #+#             */
-/*   Updated: 2025/08/26 19:56:41 by jegerman         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:41:06 by jegerman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int main(int argc, char **argv)
 
 	if (++argv, --argc != 1)
 		return (1);
-	for (unsigned char *p = (unsigned char *)*argv; *p; p++)
-		cfreq[*p]++;
+	for (unsigned char *c = (unsigned char *)*argv; *c; c++)
+		cfreq[*c]++;
 	permutations(0, *argv, ft_strlen(*argv), cfreq);
 	return (0);
 }
